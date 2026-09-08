@@ -125,24 +125,24 @@ const timelineData: TimelineItem[] = [
     ],
   },
 
-  // CARD 4: Work Experience at Orivin Global
+  // CARD 4: Work Experience at Orvin Global
   {
-    id: 'orivin-global-work',
+    id: 'orvin-global-work',
     type: 'experience',
     badge: 'Work Experience',
     title: 'Web Developer',
-    organization: 'Orivin Global',
+    organization: 'Orvin Global',
     location: 'Remote',
     period: '2026 (5 Month Remote Job)',
     description: 'Served as Web Developer delivering 6+ production-ready full-stack projects for clients. Built end-to-end web applications, interactive admin dashboards, automated ATS Resume Scoring tools, and conversational AI chatbots.',
     highlights: [
-      '5 Month Remote Job at Orivin Global',
+      '5 Month Remote Job at Orvin Global',
       'Delivered 6+ projects: Full-stack websites & premium management dashboards',
       'ATS Resume Scoring algorithms & Job Vacancies applicant tracking',
       'AI Chatbot integration with customized conversational contexts',
     ],
     skills: [
-      'Orivin Global',
+      'Orvin Global',
       '5 Month Remote Job',
       '6+ Projects Delivered',
       'Full-Stack Websites',
@@ -199,7 +199,7 @@ export const TimelineSection: React.FC = () => {
             className="text-sm md:text-base font-light text-[#A9A39D] leading-relaxed max-w-2xl mb-6"
             style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
           >
-            A documented chronological record of academic foundation, software development at <strong className="text-[#E9E3DC] font-medium">Orivin Global</strong>, and Cloud Applied GenAI engineering at <strong className="text-[#E9E3DC] font-medium">Governor House Karachi (GIAIC)</strong>.
+            A documented chronological record of academic foundation, software development at <strong className="text-[#E9E3DC] font-medium">Orvin Global</strong>, and Cloud Applied GenAI engineering at <strong className="text-[#E9E3DC] font-medium">Governor House Karachi (GIAIC)</strong>.
           </motion.p>
         </div>
 

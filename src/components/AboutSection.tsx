@@ -270,7 +270,7 @@ export const AboutSection: React.FC = () => {
                       </h4>
                     </div>
                     <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#222120] text-[#C8A77A] border border-[#6F5B43]/40 font-semibold">
-                      Orivin Global
+                      Orvin Global
                     </span>
                   </div>
                   
@@ -300,7 +300,7 @@ export const AboutSection: React.FC = () => {
 
                 <div className="mt-6 pt-3 border-t border-[#6F5B43]/20 flex justify-between items-center text-[10px] font-mono text-[#A9A39D]">
                   <span>Status: Production Remote</span>
-                  <span className="text-[#C8A77A] font-semibold">Orivin Global</span>
+                  <span className="text-[#C8A77A] font-semibold">Orvin Global</span>
                 </div>
               </div>
 
@@ -359,7 +359,7 @@ export const AboutSection: React.FC = () => {
                     6+
                   </span>
                   <span className="text-[11px] font-mono tracking-widest text-[#A9A39D] uppercase">
-                    PROJECTS AT ORIVIN GLOBAL
+                    PROJECTS AT ORVIN GLOBAL
                   </span>
                 </div>
                 <div className="w-10 h-10 rounded-full bg-[#0B0B0A] border border-[#6F5B43]/40 flex items-center justify-center text-[#C8A77A]">
@@ -376,7 +376,7 @@ export const AboutSection: React.FC = () => {
                     5 MO
                   </span>
                   <span className="text-[11px] font-mono tracking-widest text-[#A9A39D] uppercase">
-                    ORIVIN GLOBAL REMOTE EXP.
+                    ORVIN GLOBAL REMOTE EXP.
                   </span>
                 </div>
                 <div className="w-10 h-10 rounded-full bg-[#0B0B0A] border border-[#6F5B43]/40 flex items-center justify-center text-[#C8A77A]">
