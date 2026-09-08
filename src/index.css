@@ -1,0 +1,91 @@
+
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-heading: 'Syne', 'Space Grotesk', sans-serif;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --bg-main: #0B0B0A;
+    --bg-secondary: #151514;
+    --bg-card: #222120;
+    --text-main: #E9E3DC;
+    --text-secondary: #A9A39D;
+    --accent-gold: #C8A77A;
+    --accent-light: #D8C3AA;
+    --border-gold: #6F5B43;
+    --border-muted: #5E5A56;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #0B0B0A;
+    color: #E9E3DC;
+    font-family: var(--font-body);
+  }
+}
+
+/* Gold Gradient Shimmer */
+@keyframes goldShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #E9E3DC 0%, #C8A77A 50%, #D8C3AA 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmer 6s ease infinite;
+}
+
+.gold-accent-text {
+  color: #C8A77A;
+}
+
+/* Custom refined gold scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B0B0A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6F5B43;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C8A77A;
+}
+
+/* Light mode inversion filter that turns dark palette into elegant warm light palette */
+html.light {
+  filter: invert(1) hue-rotate(180deg);
+  background-color: #f7f6f2;
+}
+
+html.light img, 
+html.light video {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+html {
+  transition: filter 0.35s ease;
+}
