@@ -3,6 +3,7 @@ import {
   LayoutDashboard,
   FolderGit2,
   PlusCircle,
+  Mail,
   Users,
   Settings,
   LogOut,
@@ -13,12 +14,13 @@ import {
   UserCheck
 } from 'lucide-react';
 
-export type AdminTab = 'dashboard' | 'projects' | 'add-project' | 'users' | 'settings';
+export type AdminTab = 'dashboard' | 'projects' | 'add-project' | 'messages' | 'users' | 'settings';
 
 interface AdminLayoutProps {
   currentTab: AdminTab;
   onSelectTab: (tab: AdminTab) => void;
   adminUser: any;
+  unreadCount?: number;
   onLogout: () => void;
   onViewPortfolio: () => void;
   children: React.ReactNode;
@@ -28,6 +30,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
   currentTab,
   onSelectTab,
   adminUser,
+  unreadCount = 0,
   onLogout,
   onViewPortfolio,
   children,
@@ -39,6 +42,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
     { id: 'dashboard' as AdminTab, label: 'Dashboard', icon: LayoutDashboard },
     { id: 'projects' as AdminTab, label: 'Projects', icon: FolderGit2 },
     { id: 'add-project' as AdminTab, label: 'Add Project', icon: PlusCircle },
+    { id: 'messages' as AdminTab, label: 'Messages', icon: Mail, badge: unreadCount },
     ...(isSuperAdmin
       ? [{ id: 'users' as AdminTab, label: 'Admin Management', icon: Users }]
       : []),
@@ -134,14 +138,27 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-xs font-mono uppercase tracking-wider transition-all cursor-pointer ${
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-mono uppercase tracking-wider transition-all cursor-pointer ${
                     isActive
                       ? 'bg-[#C8A77A] text-[#0B0B0A] font-bold shadow-md'
                       : 'text-[#A9A39D] hover:text-[#E9E3DC] hover:bg-[#222120]'
                   }`}
                 >
-                  <Icon className="w-4 h-4" />
-                  <span>{item.label}</span>
+                  <div className="flex items-center space-x-3">
+                    <Icon className="w-4 h-4" />
+                    <span>{item.label}</span>
+                  </div>
+                  {item.badge && item.badge > 0 ? (
+                    <span
+                      className={`px-1.5 py-0.5 rounded-full text-[10px] font-mono font-bold leading-none ${
+                        isActive
+                          ? 'bg-[#0B0B0A] text-[#C8A77A]'
+                          : 'bg-[#C8A77A] text-[#0B0B0A]'
+                      }`}
+                    >
+                      {item.badge}
+                    </span>
+                  ) : null}
                 </button>
               );
             })}

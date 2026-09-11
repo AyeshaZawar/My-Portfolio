@@ -14,6 +14,7 @@ import projectRoutes from './server/routes/projectRoutes';
 import adminRoutes from './server/routes/adminRoutes';
 import settingsRoutes from './server/routes/settingsRoutes';
 import uploadRoutes from './server/routes/uploadRoutes';
+import messageRoutes from './server/routes/messageRoutes';
 
 async function startServer() {
   const app = express();
@@ -51,6 +52,7 @@ async function startServer() {
   app.use('/api', adminRoutes);
   app.use('/api', settingsRoutes);
   app.use('/api', uploadRoutes);
+  app.use('/api', messageRoutes);
 
   // Centralized API Error Handling Middleware
   app.use('/api', (err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {

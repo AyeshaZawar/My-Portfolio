@@ -7,8 +7,11 @@ import {
   Send, 
   Check, 
   Copy, 
-  ArrowUpRight
+  ArrowUpRight,
+  Loader2,
+  AlertCircle
 } from 'lucide-react';
+import { sendContactMessage } from '../services/api';
 
 interface ContactSectionProps {}
 
@@ -20,21 +23,35 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
     message: '' 
   });
   const [sent, setSent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
+    setErrorMsg(null);
+    setIsSubmitting(true);
 
     try {
-      confetti({
-        particleCount: 80,
-        spread: 60,
-        origin: { y: 0.75 },
-        colors: ['#C8A77A', '#D8C3AA', '#80746A', '#6F5B43', '#E9E3DC']
-      });
-    } catch {
-      // safe fallback
+      await sendContactMessage(formData);
+      setSent(true);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+
+      try {
+        confetti({
+          particleCount: 80,
+          spread: 60,
+          origin: { y: 0.75 },
+          colors: ['#C8A77A', '#D8C3AA', '#80746A', '#6F5B43', '#E9E3DC']
+        });
+      } catch {
+        // safe fallback
+      }
+    } catch (err: any) {
+      console.error('Contact submission error:', err);
+      setErrorMsg(err.message || 'Failed to transmit message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -145,16 +162,16 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
                       DIRECT PHONE / WHATSAPP
                     </span>
                     <a
-                      href="tel:+923052442205"
+                      href="tel:+923098782253"
                       className="block text-sm font-bold text-[#E9E3DC] group-hover:text-[#C8A77A] transition-colors"
                     >
-                      +92 305 2442205
+                      +92 309 8782253
                     </a>
                   </div>
                 </div>
 
                 <button
-                  onClick={() => copyToClipboard('+923052442205', 'phone')}
+                  onClick={() => copyToClipboard('+92 309 8782253', 'phone')}
                   className="p-2 text-[#A9A39D] hover:text-[#C8A77A] transition-colors"
                   title="Copy phone number"
                 >
@@ -195,7 +212,10 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
                     Thank you for reaching out. I have logged your message and will respond promptly via email.
                   </p>
                   <button
-                    onClick={() => setSent(false)}
+                    onClick={() => {
+                      setSent(false);
+                      setErrorMsg(null);
+                    }}
                     className="mt-4 px-6 py-2.5 rounded-md text-xs font-mono uppercase bg-[#C8A77A] text-[#0B0B0A] font-bold hover:bg-[#D8C3AA] transition-colors"
                   >
                     Send Another Note
@@ -203,6 +223,13 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4 text-xs font-mono">
+                  {errorMsg && (
+                    <div className="p-3 rounded-lg bg-red-950/40 border border-red-800/60 text-red-300 text-xs flex items-center space-x-2">
+                      <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                      <span>{errorMsg}</span>
+                    </div>
+                  )}
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[#A9A39D] uppercase tracking-wider mb-2">
@@ -211,10 +238,11 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
                       <input
                         type="text"
                         required
+                        disabled={isSubmitting}
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="Ayesha Khan"
-                        className="w-full px-4 py-3 rounded-lg bg-[#151514] border border-[#6F5B43]/50 text-[#E9E3DC] placeholder-[#5E5A56] focus:border-[#C8A77A] focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 rounded-lg bg-[#151514] border border-[#6F5B43]/50 text-[#E9E3DC] placeholder-[#5E5A56] focus:border-[#C8A77A] focus:outline-none transition-colors disabled:opacity-50"
                       />
                     </div>
 
@@ -225,10 +253,11 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
                       <input
                         type="email"
                         required
+                        disabled={isSubmitting}
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="you@domain.com"
-                        className="w-full px-4 py-3 rounded-lg bg-[#151514] border border-[#6F5B43]/50 text-[#E9E3DC] placeholder-[#5E5A56] focus:border-[#C8A77A] focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 rounded-lg bg-[#151514] border border-[#6F5B43]/50 text-[#E9E3DC] placeholder-[#5E5A56] focus:border-[#C8A77A] focus:outline-none transition-colors disabled:opacity-50"
                       />
                     </div>
                   </div>
@@ -239,10 +268,11 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
                     </label>
                     <input
                       type="text"
+                      disabled={isSubmitting}
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                       placeholder="e.g., Hiring Inquiry, Full-Stack Web App"
-                      className="w-full px-4 py-3 rounded-lg bg-[#151514] border border-[#6F5B43]/50 text-[#E9E3DC] placeholder-[#5E5A56] focus:border-[#C8A77A] focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-lg bg-[#151514] border border-[#6F5B43]/50 text-[#E9E3DC] placeholder-[#5E5A56] focus:border-[#C8A77A] focus:outline-none transition-colors disabled:opacity-50"
                     />
                   </div>
 
@@ -253,19 +283,30 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
                     <textarea
                       rows={5}
                       required
+                      disabled={isSubmitting}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Describe your vision, goals, or timeline..."
-                      className="w-full px-4 py-3 rounded-lg bg-[#151514] border border-[#6F5B43]/50 text-[#E9E3DC] placeholder-[#5E5A56] focus:border-[#C8A77A] focus:outline-none transition-colors resize-none"
+                      className="w-full px-4 py-3 rounded-lg bg-[#151514] border border-[#6F5B43]/50 text-[#E9E3DC] placeholder-[#5E5A56] focus:border-[#C8A77A] focus:outline-none transition-colors resize-none disabled:opacity-50"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full py-4 rounded-lg bg-[#C8A77A] hover:bg-[#D8C3AA] text-[#0B0B0A] font-bold uppercase tracking-widest text-xs transition-all duration-300 flex items-center justify-center space-x-2 shadow-[0_4px_20px_rgba(200,167,122,0.3)] cursor-pointer"
+                    disabled={isSubmitting}
+                    className="w-full py-4 rounded-lg bg-[#C8A77A] hover:bg-[#D8C3AA] text-[#0B0B0A] font-bold uppercase tracking-widest text-xs transition-all duration-300 flex items-center justify-center space-x-2 shadow-[0_4px_20px_rgba(200,167,122,0.3)] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    <span>TRANSMIT MESSAGE</span>
-                    <Send className="w-4 h-4" />
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>TRANSMITTING MESSAGE...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>TRANSMIT MESSAGE</span>
+                        <Send className="w-4 h-4" />
+                      </>
+                    )}
                   </button>
                 </form>
               )}

@@ -250,3 +250,73 @@ export async function uploadMedia(file: File): Promise<{
 
   return data.file;
 }
+
+// ================= DIRECT MESSAGES / INQUIRIES APIs =================
+export async function sendContactMessage(formData: {
+  name: string;
+  email: string;
+  subject?: string;
+  message: string;
+}) {
+  const res = await apiRequest<{
+    success: boolean;
+    message: string;
+    data: any;
+  }>('/api/contact', {
+    method: 'POST',
+    body: JSON.stringify(formData),
+  });
+  return res;
+}
+
+export async function getAdminMessages(filter?: { unread?: boolean; search?: string }) {
+  const params = new URLSearchParams();
+  if (typeof filter?.unread === 'boolean') {
+    params.append('unread', String(filter.unread));
+  }
+  if (filter?.search) {
+    params.append('search', filter.search);
+  }
+
+  const query = params.toString() ? `?${params.toString()}` : '';
+  const res = await apiRequest<{
+    success: boolean;
+    count: number;
+    unreadCount: number;
+    data: any[];
+  }>(`/api/admin/messages${query}`);
+  return res.data || [];
+}
+
+export async function markMessageRead(id: string, isRead = true) {
+  const res = await apiRequest<{
+    success: boolean;
+    message: string;
+    data: any;
+  }>(`/api/admin/messages/${id}/read`, {
+    method: 'PATCH',
+    body: JSON.stringify({ isRead }),
+  });
+  return res.data;
+}
+
+export async function markAllMessagesRead() {
+  const res = await apiRequest<{
+    success: boolean;
+    message: string;
+  }>('/api/admin/messages/mark-all-read', {
+    method: 'POST',
+  });
+  return res;
+}
+
+export async function deleteAdminMessage(id: string) {
+  const res = await apiRequest<{
+    success: boolean;
+    message: string;
+  }>(`/api/admin/messages/${id}`, {
+    method: 'DELETE',
+  });
+  return res;
+}
+

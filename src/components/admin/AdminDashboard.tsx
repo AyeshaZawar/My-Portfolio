@@ -7,12 +7,14 @@ import { AdminLogin } from './AdminLogin';
 import { DashboardOverview } from './DashboardOverview';
 import { ProjectList } from './ProjectList';
 import { ProjectForm } from './ProjectForm';
+import { AdminMessagesList } from './AdminMessagesList';
 import { AdminUsersList } from './AdminUsersList';
 import { AdminSettings } from './AdminSettings';
 import {
   getStoredToken,
   getStoredAdminUser,
   getCurrentAdmin,
+  getAdminStats,
   logoutAdmin
 } from '../../services/api';
 
@@ -30,6 +32,19 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const [currentTab, setCurrentTab] = useState<AdminTab>('dashboard');
   const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
   const [projectCategoryFilter, setProjectCategoryFilter] = useState<string>('all');
+  const [unreadCount, setUnreadCount] = useState<number>(0);
+
+  const refreshUnreadCount = async () => {
+    if (!getStoredToken()) return;
+    try {
+      const stats = await getAdminStats();
+      if (typeof stats?.unreadMessages === 'number') {
+        setUnreadCount(stats.unreadMessages);
+      }
+    } catch {
+      // silently ignore
+    }
+  };
 
   // Verify session on mount
   useEffect(() => {
@@ -39,6 +54,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           const user = await getCurrentAdmin();
           setAdminUser(user);
           setIsAuthenticated(true);
+          refreshUnreadCount();
         } catch {
           setIsAuthenticated(false);
           setAdminUser(null);
@@ -52,6 +68,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     setAdminUser(user);
     setIsAuthenticated(true);
     setCurrentTab('dashboard');
+    refreshUnreadCount();
   };
 
   const handleLogout = async () => {
@@ -78,8 +95,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           setEditingProjectId(null);
         }
         setCurrentTab(tab);
+        refreshUnreadCount();
       }}
       adminUser={adminUser}
+      unreadCount={unreadCount}
       onLogout={handleLogout}
       onViewPortfolio={onReturnToPortfolio}
     >
@@ -95,6 +114,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             setCurrentTab('projects');
           }}
           onNavigateToUsers={() => setCurrentTab('users')}
+          onNavigateToMessages={() => setCurrentTab('messages')}
           onEditProject={(id) => {
             setEditingProjectId(id);
             setCurrentTab('add-project');
@@ -134,12 +154,17 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         />
       )}
 
-      {/* 4. Admin Management (Super Admin only) */}
+      {/* 4. Client Messages & Inquiries */}
+      {currentTab === 'messages' && (
+        <AdminMessagesList />
+      )}
+
+      {/* 5. Admin Management (Super Admin only) */}
       {currentTab === 'users' && (
         <AdminUsersList currentAdmin={adminUser} />
       )}
 
-      {/* 5. Settings */}
+      {/* 6. Settings */}
       {currentTab === 'settings' && (
         <AdminSettings
           currentAdmin={adminUser}

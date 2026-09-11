@@ -10,6 +10,7 @@ const FALLBACK_FILE = path.join(FALLBACK_DIR, 'db-fallback.json');
 export interface FallbackDB {
   admins: any[];
   projects: any[];
+  messages?: any[];
 }
 
 // Read fallback database from JSON file
@@ -19,15 +20,19 @@ export function readFallbackDB(): FallbackDB {
       fs.mkdirSync(FALLBACK_DIR, { recursive: true });
     }
     if (!fs.existsSync(FALLBACK_FILE)) {
-      const initial: FallbackDB = { admins: [], projects: [] };
+      const initial: FallbackDB = { admins: [], projects: [], messages: [] };
       fs.writeFileSync(FALLBACK_FILE, JSON.stringify(initial, null, 2), 'utf-8');
       return initial;
     }
     const raw = fs.readFileSync(FALLBACK_FILE, 'utf-8');
-    return JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    if (!parsed.messages) {
+      parsed.messages = [];
+    }
+    return parsed;
   } catch (err) {
     console.error('[FallbackDB] Error reading fallback file:', err);
-    return { admins: [], projects: [] };
+    return { admins: [], projects: [], messages: [] };
   }
 }
 

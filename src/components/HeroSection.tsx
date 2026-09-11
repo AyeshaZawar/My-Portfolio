@@ -281,7 +281,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenAllProjects }) =
               <div className="pt-6 border-t border-[#6F5B43]/30">
                 <div className="text-[11px] font-mono text-[#A9A39D] space-y-1.5 mb-4">
                   <div>ayeshazawar2616@gmail.com</div>
-                  <div>+92 305 2442205</div>
+                  <div>+92 309 8782253</div>
                 </div>
 
                 <div className="flex items-center space-x-4 text-xs font-mono text-[#A9A39D]">
@@ -467,7 +467,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenAllProjects }) =
             </span>
             <span className="flex items-center space-x-1.5">
               <Phone className="w-3.5 h-3.5 text-[#C8A77A]" />
-              <a href="tel:+923052442205" className="hover:text-[#E9E3DC] transition-colors">+92 305 2442205</a>
+              <a href="tel:+923098782253" className="hover:text-[#E9E3DC] transition-colors">+92 309 8782253</a>
             </span>
           </div>
           <div className="flex items-center">

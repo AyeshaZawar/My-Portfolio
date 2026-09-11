@@ -7,6 +7,7 @@ import {
   Plus,
   ArrowUpRight,
   Loader2,
+  Mail,
   Eye,
   EyeOff
 } from 'lucide-react';
@@ -16,6 +17,7 @@ interface DashboardOverviewProps {
   onNavigateToAddProject: () => void;
   onNavigateToProjects: (category?: string) => void;
   onNavigateToUsers: () => void;
+  onNavigateToMessages?: () => void;
   onEditProject: (projectId: string) => void;
   onViewPortfolio: () => void;
 }
@@ -24,6 +26,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
   onNavigateToAddProject,
   onNavigateToProjects,
   onNavigateToUsers,
+  onNavigateToMessages,
   onEditProject,
   onViewPortfolio,
 }) => {
@@ -105,7 +108,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
       </div>
 
       {/* Primary KPI Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {/* Total Projects */}
         <div 
           onClick={() => onNavigateToProjects()}
@@ -145,6 +148,32 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
           </div>
           <div className="text-3xl sm:text-4xl font-extrabold text-amber-400" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
             {stats?.draftProjects ?? 0}
+          </div>
+        </div>
+
+        {/* Messages / Inquiries */}
+        <div 
+          onClick={() => onNavigateToMessages?.()}
+          className="p-5 rounded-2xl bg-[#151514] border border-[#6F5B43]/40 hover:border-[#C8A77A] transition-all cursor-pointer group shadow-sm relative overflow-hidden"
+        >
+          <div className="flex items-center justify-between text-[#A9A39D] mb-2">
+            <span className="text-[10px] font-mono uppercase tracking-wider font-semibold flex items-center space-x-1.5">
+              <span>INQUIRIES</span>
+              {(stats?.unreadMessages ?? 0) > 0 && (
+                <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+              )}
+            </span>
+            <Mail className="w-4 h-4 text-[#C8A77A]" />
+          </div>
+          <div className="flex items-baseline space-x-2">
+            <span className="text-3xl sm:text-4xl font-extrabold text-[#E9E3DC]" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+              {stats?.totalMessages ?? 0}
+            </span>
+            {(stats?.unreadMessages ?? 0) > 0 && (
+              <span className="text-[10px] font-mono font-bold uppercase text-amber-400 bg-amber-400/10 px-1.5 py-0.5 rounded">
+                {stats.unreadMessages} NEW
+              </span>
+            )}
           </div>
         </div>
 

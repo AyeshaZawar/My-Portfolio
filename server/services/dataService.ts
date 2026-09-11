@@ -1,6 +1,7 @@
 import { isMongoActive, readFallbackDB, writeFallbackDB } from '../db/mongodb';
 import { ProjectModel } from '../models/Project';
 import { AdminModel } from '../models/Admin';
+import { MessageModel } from '../models/Message';
 import crypto from 'crypto';
 
 export interface ProjectFilter {
@@ -275,6 +276,9 @@ export const DataService = {
     const publishedCount = all.filter((p) => p.published !== false).length;
     const draftCount = all.filter((p) => p.published === false).length;
 
+    const messages = await this.getMessages();
+    const unreadMessages = messages.filter((m) => !m.isRead).length;
+
     return {
       totalProjects: all.length,
       publishedProjects: publishedCount,
@@ -286,6 +290,126 @@ export const DataService = {
       },
       totalAdmins: admins.length,
       superAdmins: admins.filter((a) => a.role === 'SUPER_ADMIN').length,
+      totalMessages: messages.length,
+      unreadMessages,
     };
+  },
+
+  // ================= DIRECT MESSAGES METHODS =================
+  async createMessage(data: { name: string; email: string; subject?: string; message: string }): Promise<any> {
+    const cleanData = {
+      name: data.name.trim(),
+      email: data.email.toLowerCase().trim(),
+      subject: (data.subject || '').trim(),
+      message: data.message.trim(),
+      isRead: false,
+    };
+
+    if (isMongoActive()) {
+      const created = await MessageModel.create(cleanData);
+      return { ...created.toObject(), id: created._id.toString() };
+    } else {
+      const db = readFallbackDB();
+      if (!db.messages) db.messages = [];
+      const id = 'msg_' + crypto.randomUUID().slice(0, 12);
+      const newMsg = {
+        ...cleanData,
+        id,
+        _id: id,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      db.messages.unshift(newMsg); // newest first
+      writeFallbackDB(db);
+      return newMsg;
+    }
+  },
+
+  async getMessages(filter: { isRead?: boolean; search?: string } = {}): Promise<any[]> {
+    if (isMongoActive()) {
+      const query: any = {};
+      if (typeof filter.isRead === 'boolean') {
+        query.isRead = filter.isRead;
+      }
+      if (filter.search) {
+        const regex = new RegExp(filter.search, 'i');
+        query.$or = [{ name: regex }, { email: regex }, { subject: regex }, { message: regex }];
+      }
+      const list = await MessageModel.find(query).sort({ createdAt: -1 }).lean();
+      return list.map((m: any) => ({ ...m, id: m._id.toString() }));
+    } else {
+      const db = readFallbackDB();
+      let list = [...(db.messages || [])];
+      if (typeof filter.isRead === 'boolean') {
+        list = list.filter((m) => Boolean(m.isRead) === filter.isRead);
+      }
+      if (filter.search) {
+        const s = filter.search.toLowerCase();
+        list = list.filter(
+          (m) =>
+            (m.name && m.name.toLowerCase().includes(s)) ||
+            (m.email && m.email.toLowerCase().includes(s)) ||
+            (m.subject && m.subject.toLowerCase().includes(s)) ||
+            (m.message && m.message.toLowerCase().includes(s))
+        );
+      }
+      list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      return list;
+    }
+  },
+
+  async markMessageRead(id: string, isRead = true): Promise<any | null> {
+    if (isMongoActive()) {
+      const updated = await MessageModel.findByIdAndUpdate(
+        id,
+        { isRead, updatedAt: new Date() },
+        { new: true }
+      ).lean();
+      if (!updated) return null;
+      return { ...updated, id: (updated as any)._id.toString() };
+    } else {
+      const db = readFallbackDB();
+      if (!db.messages) db.messages = [];
+      const idx = db.messages.findIndex((m) => m.id === id || m._id === id);
+      if (idx === -1) return null;
+      db.messages[idx] = {
+        ...db.messages[idx],
+        isRead,
+        updatedAt: new Date().toISOString(),
+      };
+      writeFallbackDB(db);
+      return db.messages[idx];
+    }
+  },
+
+  async markAllMessagesAsRead(): Promise<boolean> {
+    if (isMongoActive()) {
+      await MessageModel.updateMany({ isRead: false }, { isRead: true, updatedAt: new Date() });
+      return true;
+    } else {
+      const db = readFallbackDB();
+      if (!db.messages) db.messages = [];
+      db.messages.forEach((m) => {
+        m.isRead = true;
+        m.updatedAt = new Date().toISOString();
+      });
+      writeFallbackDB(db);
+      return true;
+    }
+  },
+
+  async deleteMessage(id: string): Promise<boolean> {
+    if (isMongoActive()) {
+      const res = await MessageModel.findByIdAndDelete(id);
+      return !!res;
+    } else {
+      const db = readFallbackDB();
+      if (!db.messages) return false;
+      const initial = db.messages.length;
+      db.messages = db.messages.filter((m) => m.id !== id && m._id !== id);
+      const deleted = db.messages.length < initial;
+      if (deleted) writeFallbackDB(db);
+      return deleted;
+    }
   },
 };
