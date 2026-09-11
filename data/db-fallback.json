@@ -1,0 +1,744 @@
+{
+  "admins": [
+    {
+      "name": "Ayesha Zawar",
+      "email": "ayeshazawar2616@gmail.com",
+      "passwordHash": "$2b$10$aan1mqPZOOhddblacqyY.Or7Rw.cbfX50LMDZOglpkJJizBdJBJUK",
+      "role": "SUPER_ADMIN",
+      "status": "active",
+      "id": "admin_ccfbf5be-2",
+      "_id": "admin_ccfbf5be-2",
+      "createdAt": "2026-09-09T19:22:45.858Z",
+      "updatedAt": "2026-09-11T15:21:30.962Z",
+      "lastLoginAt": "2026-09-11T15:21:30.962Z"
+    }
+  ],
+  "projects": [
+    {
+      "title": "BNB — Bucks n Bricks",
+      "name": "BNB — Bucks n Bricks",
+      "subtitle": "RECRUITMENT & HR PLATFORM",
+      "slug": "bnb",
+      "category": "main",
+      "categoryLabel": "MAIN PROJECT // FULL-STACK PLATFORM",
+      "typeLabel": "RECRUITMENT & HR PLATFORM",
+      "shortDescription": "Bucks n Bricks is a recruitment-focused platform where users can explore vacancies, apply for jobs, and use an AI-powered resume checking feature. The platform also includes a chatbot and recruitment-related information/services.",
+      "detailedDescription": "A major full-stack recruitment platform engineered to connect job seekers and corporate recruiters. The platform combines public vacancy exploration, responsive candidate application workflows, automated AI-assisted resume check and scoring functionality, interactive recruitment chatbot assistance, and robust backend administrative services.",
+      "demonstrates": "",
+      "previewImage": "",
+      "images": [
+        {
+          "id": "bnb-img-1",
+          "type": "image",
+          "title": "Homepage & Primary Vacancy Showcase",
+          "caption": "Executive recruitment landing view presenting active vacancies, service catalog, and candidate search bar.",
+          "url": "",
+          "aspectRatio": "16/9"
+        },
+        {
+          "id": "bnb-img-2",
+          "type": "image",
+          "title": "Job Vacancy Details & Application Modal",
+          "caption": "Detailed job requirements view with instant application form and document attachment.",
+          "url": "",
+          "aspectRatio": "16/9"
+        },
+        {
+          "id": "bnb-img-3",
+          "type": "image",
+          "title": "AI Resume Analyzer & Feedback Dashboard",
+          "caption": "Interactive scoring metric calculating candidate compatibility, keyword density, and recommendations.",
+          "url": "",
+          "aspectRatio": "16/9"
+        },
+        {
+          "id": "bnb-img-4",
+          "type": "image",
+          "title": "Interactive Recruitment Assistant Chatbot",
+          "caption": "Real-time assistant answering candidate queries and guiding vacancy selection.",
+          "url": "",
+          "aspectRatio": "16/9"
+        }
+      ],
+      "videos": [
+        {
+          "id": "bnb-vid-1",
+          "type": "video",
+          "title": "Full Platform Walkthrough & Resume AI Demo",
+          "caption": "Screen recording demonstrating vacancy browsing, candidate job submission, AI resume scoring, and chatbot interactions.",
+          "url": "",
+          "aspectRatio": "16/9"
+        }
+      ],
+      "githubUrl": "https://github.com/AyeshaZawar/bnb-final",
+      "liveUrl": "https://bnb-final-gray.vercel.app/",
+      "technologies": [
+        "React.js",
+        "Node.js",
+        "Express",
+        "MongoDB Atlas",
+        "AI Resume Scoring",
+        "REST APIs",
+        "Chatbot Engine",
+        "Tailwind CSS"
+      ],
+      "features": [
+        "Job & Vacancy Listings Browsing",
+        "Direct Job Application Workflows",
+        "Resume Upload & File Processing",
+        "AI Resume Score / Check Functionality",
+        "Interactive Recruitment Chatbot",
+        "Recruitment Services & Corporate Details",
+        "Administrative & Backend Management"
+      ],
+      "published": true,
+      "order": 0,
+      "id": "proj_79ecdf95-16c",
+      "_id": "proj_79ecdf95-16c",
+      "createdAt": "2026-09-09T19:22:45.859Z",
+      "updatedAt": "2026-09-09T19:22:45.859Z"
+    },
+    {
+      "title": "Al Najaf Catering",
+      "name": "Al Najaf Catering",
+      "subtitle": "CATERING / FOOD-SERVICE BUSINESS WEBSITE",
+      "slug": "al-najaf-catering",
+      "category": "main",
+      "categoryLabel": "MAIN PROJECT // COMMERCIAL WEBSITE",
+      "typeLabel": "CATERING / FOOD-SERVICE BUSINESS WEBSITE",
+      "shortDescription": "A professional catering and business website created for a catering-related business with interactive menus, quotation forms, and fluid motion design.",
+      "detailedDescription": "Engineered as a commercial catering and food-service business website. Features structured menu catalogs, custom inquiry & booking forms, fluid scroll animations powered by GSAP and Framer Motion, and robust database integration with Supabase.",
+      "demonstrates": "",
+      "previewImage": "",
+      "images": [
+        {
+          "id": "alnajaf-img-1",
+          "type": "image",
+          "title": "Commercial Landing Page & Hero Section",
+          "caption": "Refined brand presentation featuring high-contrast layout and hospitality service tiers.",
+          "url": "",
+          "aspectRatio": "16/9"
+        },
+        {
+          "id": "alnajaf-img-2",
+          "type": "image",
+          "title": "Categorized Menu Catalog",
+          "caption": "Interactive culinary menu listings with portion sizing and event package options.",
+          "url": "",
+          "aspectRatio": "16/9"
+        },
+        {
+          "id": "alnajaf-img-3",
+          "type": "image",
+          "title": "Validated Client Booking Interface",
+          "caption": "Dynamic date picker and guest estimation calculator with instant form validation.",
+          "url": "",
+          "aspectRatio": "16/9"
+        }
+      ],
+      "videos": [
+        {
+          "id": "alnajaf-vid-1",
+          "type": "video",
+          "title": "Motion Choreography & Menu Walkthrough",
+          "caption": "High-definition screen recording highlighting GSAP animations, package selection, and inquiry validation.",
+          "url": "",
+          "aspectRatio": "16/9"
+        }
+      ],
+      "githubUrl": "https://github.com/AyeshaZawar/Al_Najaf_catering_website",
+      "liveUrl": "https://al-najaf-site.vercel.app/",
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Supabase",
+        "Framer Motion",
+        "GSAP",
+        "React Query",
+        "Forms / Validation",
+        "Modern UI"
+      ],
+      "features": [
+        "Commercial Catering Showcase",
+        "Interactive Catering Menu Displays",
+        "Validated Booking & Inquiry Forms",
+        "GSAP & Framer Motion Smooth Choreography",
+        "Supabase Database Integration",
+        "Responsive Multi-Device Layout"
+      ],
+      "published": true,
+      "order": 1,
+      "id": "proj_d15a5386-b89",
+      "_id": "proj_d15a5386-b89",
+      "createdAt": "2026-09-09T19:22:45.860Z",
+      "updatedAt": "2026-09-09T19:22:45.860Z"
+    },
+    {
+      "title": "Horizon Group",
+      "name": "Horizon Group",
+      "subtitle": "CATERING & BUSINESS WEBSITE",
+      "slug": "horizon-group",
+      "category": "main",
+      "categoryLabel": "MAIN PROJECT // COMMERCIAL WEBSITE",
+      "typeLabel": "CATERING & BUSINESS WEBSITE",
+      "shortDescription": "Horizon Group is a catering and business-style website showcasing enterprise culinary services, custom event packages, and structured client inquiry workflows.",
+      "detailedDescription": "A professional corporate catering and business website engineered for commercial client engagements, highlighting hospitality solutions, event packages, and responsive multi-column layouts.",
+      "demonstrates": "",
+      "previewImage": "",
+      "images": [
+        {
+          "id": "horizon-img-1",
+          "type": "image",
+          "title": "Executive Landing & Services Grid",
+          "caption": "Clean corporate layout highlighting catering tiers, event venues, and credentials.",
+          "url": "",
+          "aspectRatio": "16/9"
+        },
+        {
+          "id": "horizon-img-2",
+          "type": "image",
+          "title": "Event Packages & Inquiry Form",
+          "caption": "Interactive client inquiry interface with custom date, guest count, and service specifications.",
+          "url": "",
+          "aspectRatio": "16/9"
+        }
+      ],
+      "videos": [
+        {
+          "id": "horizon-vid-1",
+          "type": "video",
+          "title": "Live Vercel Production Walkthrough",
+          "caption": "Screen recording demonstrating production deployment navigation, services explorer, and contact forms.",
+          "url": "",
+          "aspectRatio": "16/9"
+        }
+      ],
+      "githubUrl": "https://github.com/AyeshaZawar/Horizon-Group",
+      "liveUrl": "https://horizon-group-nine.vercel.app/",
+      "technologies": [
+        "JavaScript",
+        "React",
+        "CSS3",
+        "Tailwind CSS",
+        "Responsive UI",
+        "REST Integration"
+      ],
+      "features": [
+        "Corporate & Hospitality Services Showcase",
+        "Client Inquiry & Contact Flow",
+        "Responsive Mobile-First Architecture",
+        "High-Performance Lightweight Footprint",
+        "Modern Typography & Spacing Hierarchy"
+      ],
+      "published": true,
+      "order": 2,
+      "id": "proj_48a33903-510",
+      "_id": "proj_48a33903-510",
+      "createdAt": "2026-09-09T19:22:45.860Z",
+      "updatedAt": "2026-09-09T19:22:45.860Z"
+    },
+    {
+      "title": "ADS",
+      "name": "ADS",
+      "subtitle": "DESIGN STUDIO & PORTFOLIO",
+      "slug": "ads",
+      "category": "main",
+      "categoryLabel": "MAIN PROJECT // STUDIO PLATFORM",
+      "typeLabel": "DESIGN STUDIO & PORTFOLIO",
+      "shortDescription": "Digital design and studio web platform presenting architectural projects, interactive case studies, and modern visual media layouts.",
+      "detailedDescription": "A sleek portfolio and studio platform engineered to highlight visual design work, architectural layout systems, and interactive galleries with high-contrast typography.",
+      "demonstrates": "",
+      "previewImage": "",
+      "images": [
+        {
+          "id": "ads-img-1",
+          "type": "image",
+          "title": "Studio Showcase & Project Grid",
+          "caption": "Curated architectural project showcase with high-resolution imagery and clean typography.",
+          "url": "",
+          "aspectRatio": "16/9"
+        },
+        {
+          "id": "ads-img-2",
+          "type": "image",
+          "title": "Detailed Case Study View",
+          "caption": "Deep-dive project overview detailing conceptual design, technical blueprints, and execution.",
+          "url": "",
+          "aspectRatio": "16/9"
+        }
+      ],
+      "videos": [
+        {
+          "id": "ads-vid-1",
+          "type": "video",
+          "title": "Studio Showcase Interactive Walkthrough",
+          "caption": "Screen recording demonstrating gallery interactions, case study navigation, and editorial animations.",
+          "url": "",
+          "aspectRatio": "16/9"
+        }
+      ],
+      "githubUrl": "https://github.com/AyeshaZawar/A_D_S",
+      "liveUrl": "",
+      "technologies": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "Modern UI Standards",
+        "Responsive Media Showcase"
+      ],
+      "features": [
+        "Visual Project Case Studies",
+        "Interactive Media Galleries",
+        "Editorial Grid & Typography",
+        "Cross-Device Compatibility"
+      ],
+      "published": true,
+      "order": 3,
+      "id": "proj_a933f7f6-ab3",
+      "_id": "proj_a933f7f6-ab3",
+      "createdAt": "2026-09-09T19:22:45.860Z",
+      "updatedAt": "2026-09-09T19:22:45.860Z"
+    },
+    {
+      "title": "Pixelport",
+      "name": "Pixelport",
+      "subtitle": "DIGITAL SHOWCASE PLATFORM",
+      "slug": "pixelport",
+      "category": "main",
+      "categoryLabel": "MAIN PROJECT // DIGITAL PLATFORM",
+      "typeLabel": "DIGITAL SHOWCASE PLATFORM",
+      "shortDescription": "Modern web showcase platform designed with structured project displays, fluid typography, and clean responsive navigation.",
+      "detailedDescription": "A dedicated digital showcase platform presenting curated creative assets, responsive layouts, and intuitive navigation structures built for optimal performance.",
+      "demonstrates": "",
+      "previewImage": "",
+      "images": [
+        {
+          "id": "pixelport-img-1",
+          "type": "image",
+          "title": "Portfolio Index & Asset Grid",
+          "caption": "Minimalist interface organizing diverse digital creative assets with responsive card containers.",
+          "url": "",
+          "aspectRatio": "16/9"
+        }
+      ],
+      "videos": [
+        {
+          "id": "pixelport-vid-1",
+          "type": "video",
+          "title": "Showcase Navigation & Asset Explorer",
+          "caption": "Screen recording demonstrating fast client-side transitions and responsive card interactions.",
+          "url": "",
+          "aspectRatio": "16/9"
+        }
+      ],
+      "githubUrl": "https://github.com/AyeshaZawar/Pixelport",
+      "liveUrl": "https://p-f-rust.vercel.app/",
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Vite",
+        "Modern UI Architecture"
+      ],
+      "features": [
+        "Curated Project Showcase Cards",
+        "Fluid Typography & Responsive Layout",
+        "Clean Dark-Mode Aesthetic",
+        "Fast Client-Side Routing"
+      ],
+      "published": true,
+      "order": 4,
+      "id": "proj_5a55b67d-cf0",
+      "_id": "proj_5a55b67d-cf0",
+      "createdAt": "2026-09-09T19:22:45.860Z",
+      "updatedAt": "2026-09-09T19:22:45.861Z"
+    },
+    {
+      "title": "Python Operators",
+      "name": "Python Operators",
+      "subtitle": "LOGIC & OPERATORS SUITE",
+      "slug": "python-operators",
+      "category": "learning",
+      "categoryLabel": "PYTHON LEARNING // MODULE 01",
+      "typeLabel": "LOGIC & OPERATORS SUITE",
+      "shortDescription": "Practical programming test suite exploring Python operators, conditional branching, boolean evaluation logic, and mathematical precedence.",
+      "detailedDescription": "A comprehensive exploration repository for Python 3 operators. Covers mathematical precedence, truthiness evaluation, logical gate chains, and bitwise bit-shift operations with interactive execution scripts.",
+      "demonstrates": "Demonstrates mastery of core arithmetic, assignment, comparison, logical, identity, membership, and bitwise operators with interactive terminal evaluation routines.",
+      "previewImage": "",
+      "images": [
+        {
+          "id": "ops-img-1",
+          "type": "image",
+          "title": "Terminal Evaluation Suite Output",
+          "caption": "Console output demonstrating operator precedence and truthiness checks.",
+          "url": "",
+          "aspectRatio": "16/9"
+        }
+      ],
+      "videos": [],
+      "githubUrl": "https://github.com/AyeshaZawar/Python-Operators",
+      "liveUrl": "",
+      "technologies": [
+        "Python 3.12",
+        "CLI",
+        "Operators Engine",
+        "Logic Evaluation"
+      ],
+      "features": [
+        "Arithmetic & Bitwise Precedence",
+        "Boolean Logic Tables",
+        "Terminal Interactive Prompts"
+      ],
+      "published": true,
+      "order": 5,
+      "id": "proj_82ea039e-287",
+      "_id": "proj_82ea039e-287",
+      "createdAt": "2026-09-09T19:22:45.861Z",
+      "updatedAt": "2026-09-09T19:22:45.861Z"
+    },
+    {
+      "title": "1st Python Project",
+      "name": "1st Python Project",
+      "subtitle": "FOUNDATIONAL ALGORITHMS",
+      "slug": "1st-python-project",
+      "category": "learning",
+      "categoryLabel": "PYTHON LEARNING // MODULE 02",
+      "typeLabel": "FOUNDATIONAL ALGORITHMS",
+      "shortDescription": "Foundational Python project demonstrating core algorithmic logic, standard I/O routines, control flow, and data structures.",
+      "detailedDescription": "Focuses on foundational programming paradigms, standard user input parsing, mathematical algorithms, and structured clean code patterns in Python.",
+      "demonstrates": "Demonstrates fundamental computer science principles, variable manipulation, loop constructs, branching conditionals, and structured function execution.",
+      "previewImage": "",
+      "images": [
+        {
+          "id": "p1-img-1",
+          "type": "image",
+          "title": "Program Execution & Flow Structure",
+          "caption": "Console interaction detailing function execution and control flow validation.",
+          "url": "",
+          "aspectRatio": "16/9"
+        }
+      ],
+      "videos": [],
+      "githubUrl": "https://github.com/AyeshaZawar/1st-Python-Project",
+      "liveUrl": "",
+      "technologies": [
+        "Python",
+        "Control Flow",
+        "Data Structures",
+        "Console I/O"
+      ],
+      "features": [
+        "Loop Iterations & Conditionals",
+        "Clean Function Separation",
+        "Console-Driven Interaction"
+      ],
+      "published": true,
+      "order": 6,
+      "id": "proj_55dc8f94-7eb",
+      "_id": "proj_55dc8f94-7eb",
+      "createdAt": "2026-09-09T19:22:45.861Z",
+      "updatedAt": "2026-09-09T19:22:45.861Z"
+    },
+    {
+      "title": "2nd Python Project",
+      "name": "2nd Python Project",
+      "subtitle": "SCRIPTING & AUTOMATION",
+      "slug": "2nd-python-project",
+      "category": "learning",
+      "categoryLabel": "PYTHON LEARNING // MODULE 03",
+      "typeLabel": "SCRIPTING & AUTOMATION",
+      "shortDescription": "Scripting and automation routines focusing on modular functions, file operations, string manipulation, and data parsing logic.",
+      "detailedDescription": "Engineered to showcase Python scripting utilities including file reading and writing, JSON payload validation, text parsing routines, and automated batch task handlers.",
+      "demonstrates": "Demonstrates asynchronous file parsing, modular helper architecture, exception handling routines, and batch processing logic.",
+      "previewImage": "",
+      "images": [
+        {
+          "id": "p2-img-1",
+          "type": "image",
+          "title": "Batch Processing & Automation Log",
+          "caption": "Automated script logs displaying file handling and exception handling checkpoints.",
+          "url": "",
+          "aspectRatio": "16/9"
+        }
+      ],
+      "videos": [],
+      "githubUrl": "https://github.com/AyeshaZawar/2nd-Python-Project",
+      "liveUrl": "",
+      "technologies": [
+        "Python",
+        "File I/O",
+        "String Parsing",
+        "Automation Helpers"
+      ],
+      "features": [
+        "File Reading & Writing Routines",
+        "Structured Exception Handling",
+        "Reusable Function Modules"
+      ],
+      "published": true,
+      "order": 7,
+      "id": "proj_10a4df5f-ce1",
+      "_id": "proj_10a4df5f-ce1",
+      "createdAt": "2026-09-09T19:22:45.862Z",
+      "updatedAt": "2026-09-09T19:22:45.862Z"
+    },
+    {
+      "title": "3rd Python Project",
+      "name": "3rd Python Project",
+      "subtitle": "DATA PROCESSING & VALIDATION",
+      "slug": "3rd-python-project",
+      "category": "learning",
+      "categoryLabel": "PYTHON LEARNING // MODULE 04",
+      "typeLabel": "DATA PROCESSING & VALIDATION",
+      "shortDescription": "Intermediate data processing tool built for dataset validation, tabular calculations, and structured summary generation.",
+      "detailedDescription": "A practical data engineering and tabular analysis practice project for parsing CSV datasets, filtering anomalous records, computing summary metrics, and exporting clean formatted summaries.",
+      "demonstrates": "Demonstrates tabular data manipulation, list/dictionary comprehension workflows, statistical aggregations, and automated data validation.",
+      "previewImage": "",
+      "images": [
+        {
+          "id": "p3-img-1",
+          "type": "image",
+          "title": "Data Parsing & Summary Metrics Report",
+          "caption": "Generated summary statistical metrics across processed tabular records.",
+          "url": "",
+          "aspectRatio": "16/9"
+        }
+      ],
+      "videos": [],
+      "githubUrl": "https://github.com/AyeshaZawar/3rd-Python-Project",
+      "liveUrl": "",
+      "technologies": [
+        "Python",
+        "Data Transformation",
+        "Validation Pipelines",
+        "CSV Parsers"
+      ],
+      "features": [
+        "Tabular Dataset Parsing",
+        "Statistical Summary Engine",
+        "Data Integrity Checks"
+      ],
+      "published": true,
+      "order": 8,
+      "id": "proj_22a5a9d6-689",
+      "_id": "proj_22a5a9d6-689",
+      "createdAt": "2026-09-09T19:22:45.862Z",
+      "updatedAt": "2026-09-09T19:22:45.862Z"
+    },
+    {
+      "title": "4th Python Project",
+      "name": "4th Python Project",
+      "subtitle": "ALGORITHMS & DATA STRUCTURES",
+      "slug": "4th-python-project",
+      "category": "learning",
+      "categoryLabel": "PYTHON LEARNING // MODULE 05",
+      "typeLabel": "ALGORITHMS & DATA STRUCTURES",
+      "shortDescription": "Algorithmic problem-solving suite featuring recursion trees, search heuristics, array sorting, and modular unit tests.",
+      "detailedDescription": "Advanced algorithm implementation suite covering recursive tree traversals, binary search implementations, sorting benchmarks, and automated unit test assertions.",
+      "demonstrates": "Demonstrates Big-O time and space complexity optimizations, recursive problem decomposition, search algorithms, and comprehensive unit tests.",
+      "previewImage": "",
+      "images": [
+        {
+          "id": "p4-img-1",
+          "type": "image",
+          "title": "Unit Test Execution & Performance Benchmarks",
+          "caption": "Passing automated test suites and execution time benchmarks.",
+          "url": "",
+          "aspectRatio": "16/9"
+        }
+      ],
+      "videos": [],
+      "githubUrl": "https://github.com/AyeshaZawar/4th-Python-Project",
+      "liveUrl": "",
+      "technologies": [
+        "Python",
+        "Algorithms",
+        "Data Structures",
+        "Unit Testing"
+      ],
+      "features": [
+        "Recursive Problem Solvers",
+        "Sorting & Search Heuristics",
+        "Modular Unit Test Suites"
+      ],
+      "published": true,
+      "order": 9,
+      "id": "proj_5795058d-f26",
+      "_id": "proj_5795058d-f26",
+      "createdAt": "2026-09-09T19:22:45.863Z",
+      "updatedAt": "2026-09-09T19:22:45.863Z"
+    },
+    {
+      "title": "Newport Portfolio",
+      "name": "Newport Portfolio",
+      "subtitle": "PORTFOLIO PRACTICE TEMPLATE",
+      "slug": "newport-portfolio",
+      "category": "templates",
+      "categoryLabel": "PRACTICE TEMPLATE // MODULE 01",
+      "typeLabel": "PORTFOLIO PRACTICE TEMPLATE",
+      "shortDescription": "A practice and template portfolio project showcasing modern layout patterns, component structure, and responsive frontend styling.",
+      "detailedDescription": "Built as an experimental portfolio template and practice frontend project exploring responsive container hierarchies, typography contrasts, and component reusability.",
+      "demonstrates": "",
+      "previewImage": "",
+      "images": [
+        {
+          "id": "newport-img-1",
+          "type": "image",
+          "title": "Template Landing View",
+          "caption": "Clean portfolio template structure with hero and project grid.",
+          "url": "",
+          "aspectRatio": "16/9"
+        }
+      ],
+      "videos": [],
+      "githubUrl": "https://github.com/AyeshaZawar/p-f",
+      "liveUrl": "https://p-f-rust.vercel.app/",
+      "technologies": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "React.js",
+        "Responsive Layout"
+      ],
+      "features": [
+        "Modular Component Layout",
+        "Clean Monochrome Aesthetics",
+        "Mobile-First Responsive Grid"
+      ],
+      "published": true,
+      "order": 10,
+      "id": "proj_e0605e66-fa9",
+      "_id": "proj_e0605e66-fa9",
+      "createdAt": "2026-09-09T19:22:45.863Z",
+      "updatedAt": "2026-09-09T19:22:45.863Z"
+    },
+    {
+      "title": "Frontend Starter Template",
+      "name": "Frontend Starter Template",
+      "subtitle": "STARTER BOILERPLATE",
+      "slug": "frontend-starter-template",
+      "category": "templates",
+      "categoryLabel": "PRACTICE TEMPLATE // MODULE 02",
+      "typeLabel": "STARTER BOILERPLATE",
+      "shortDescription": "Lightweight starter template engineered for rapid prototyping of responsive web layouts with modular CSS and utility grid components.",
+      "detailedDescription": "A clean boilerplate project configured for kickstarting modern web prototypes with minimal overhead, utility layout classes, and semantic HTML5 scaffolding.",
+      "demonstrates": "",
+      "previewImage": "",
+      "images": [
+        {
+          "id": "starter-img-1",
+          "type": "image",
+          "title": "Starter Template Structure",
+          "caption": "Scaffolded starter boilerplate components ready for rapid experimentation.",
+          "url": "",
+          "aspectRatio": "16/9"
+        }
+      ],
+      "videos": [],
+      "githubUrl": "https://github.com/AyeshaZawar",
+      "liveUrl": "",
+      "technologies": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "Utility CSS"
+      ],
+      "features": [
+        "Quick Boilerplate Setup",
+        "Utility Styling Helpers",
+        "Zero-Build Dependency"
+      ],
+      "published": true,
+      "order": 11,
+      "id": "proj_45671074-e65",
+      "_id": "proj_45671074-e65",
+      "createdAt": "2026-09-09T19:22:45.864Z",
+      "updatedAt": "2026-09-09T19:22:45.864Z"
+    },
+    {
+      "title": "Minimalist Web Template",
+      "name": "Minimalist Web Template",
+      "subtitle": "UI / EXPERIMENTAL TEMPLATE",
+      "slug": "minimalist-web-template",
+      "category": "templates",
+      "categoryLabel": "PRACTICE TEMPLATE // MODULE 03",
+      "typeLabel": "UI / EXPERIMENTAL TEMPLATE",
+      "shortDescription": "Clean baseline frontend template built for rapid experimental website prototyping, micro-interactions, and UI testing.",
+      "detailedDescription": "An experimental practice template focusing on typography balance, whitespace rhythm, and minimalist design patterns.",
+      "demonstrates": "",
+      "previewImage": "",
+      "images": [
+        {
+          "id": "minimal-img-1",
+          "type": "image",
+          "title": "Minimalist Layout Framework",
+          "caption": "Minimalist UI layout demonstrating clean whitespace and modern type scaling.",
+          "url": "",
+          "aspectRatio": "16/9"
+        }
+      ],
+      "videos": [],
+      "githubUrl": "https://github.com/AyeshaZawar",
+      "liveUrl": "",
+      "technologies": [
+        "React",
+        "Tailwind CSS",
+        "Modern UI Standards"
+      ],
+      "features": [
+        "Minimalist Card Architecture",
+        "Fluid Typography Hierarchy",
+        "Smooth CSS Transitions"
+      ],
+      "published": true,
+      "order": 12,
+      "id": "proj_62b4e777-4c1",
+      "_id": "proj_62b4e777-4c1",
+      "createdAt": "2026-09-09T19:22:45.864Z",
+      "updatedAt": "2026-09-09T19:22:45.864Z"
+    },
+    {
+      "title": "A_D_S Practice Template",
+      "name": "A_D_S Practice Template",
+      "subtitle": "STUDIO LAYOUT TEMPLATE",
+      "slug": "ads-template",
+      "category": "templates",
+      "categoryLabel": "PRACTICE TEMPLATE // MODULE 04",
+      "typeLabel": "STUDIO LAYOUT TEMPLATE",
+      "shortDescription": "Interactive design agency layout template featuring full-width showcase sections, responsive media grids, and editorial styling.",
+      "detailedDescription": "A layout practice template designed for architectural and creative agencies, with full-bleed hero sections, media grids, and editorial styling.",
+      "demonstrates": "",
+      "previewImage": "",
+      "images": [
+        {
+          "id": "ads-temp-img-1",
+          "type": "image",
+          "title": "Editorial Showcase Grid",
+          "caption": "Full-bleed responsive media container and typography pairing.",
+          "url": "",
+          "aspectRatio": "16/9"
+        }
+      ],
+      "videos": [],
+      "githubUrl": "https://github.com/AyeshaZawar/A_D_S",
+      "liveUrl": "",
+      "technologies": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "Grid Layouts"
+      ],
+      "features": [
+        "Full-Width Showcase Grids",
+        "Editorial Typography Pairing",
+        "Touch-Optimized Layout"
+      ],
+      "published": true,
+      "order": 13,
+      "id": "proj_ee0bdb09-dae",
+      "_id": "proj_ee0bdb09-dae",
+      "createdAt": "2026-09-09T19:22:45.865Z",
+      "updatedAt": "2026-09-09T19:22:45.865Z"
+    }
+  ]
+}

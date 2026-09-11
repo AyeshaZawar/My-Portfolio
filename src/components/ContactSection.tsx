@@ -10,7 +10,9 @@ import {
   ArrowUpRight
 } from 'lucide-react';
 
-export const ContactSection: React.FC = () => {
+interface ContactSectionProps {}
+
+export const ContactSection: React.FC<ContactSectionProps> = () => {
   const [formData, setFormData] = useState({ 
     name: '', 
     email: '', 

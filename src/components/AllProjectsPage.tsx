@@ -15,18 +15,22 @@ import { allProjectsData } from '../data/projectsData';
 import type { ProjectItem } from '../types/projects';
 
 interface AllProjectsPageProps {
+  projects?: ProjectItem[];
   onBackToHome: () => void;
   onSelectProject: (project: ProjectItem) => void;
 }
 
 export const AllProjectsPage: React.FC<AllProjectsPageProps> = ({
+  projects = allProjectsData,
   onBackToHome,
   onSelectProject,
 }) => {
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'main' | 'templates' | 'learning'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredProjects = allProjectsData.filter((project) => {
+  const activeProjects = projects && projects.length > 0 ? projects : allProjectsData;
+
+  const filteredProjects = activeProjects.filter((project) => {
     const matchesFilter = selectedFilter === 'all' ? true : project.category === selectedFilter;
     const matchesSearch = 
       project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -36,10 +40,10 @@ export const AllProjectsPage: React.FC<AllProjectsPageProps> = ({
   });
 
   const filterTabs = [
-    { id: 'all', label: 'ALL PROJECTS', count: allProjectsData.length },
-    { id: 'main', label: 'MAIN PLATFORMS & BNB', count: allProjectsData.filter(p => p.category === 'main').length },
-    { id: 'templates', label: 'TEMPLATES & CLONES', count: allProjectsData.filter(p => p.category === 'templates').length },
-    { id: 'learning', label: 'PYTHON & ALGORITHMS', count: allProjectsData.filter(p => p.category === 'learning').length },
+    { id: 'all', label: 'ALL PROJECTS', count: activeProjects.length },
+    { id: 'main', label: 'MAIN PLATFORMS & BNB', count: activeProjects.filter(p => p.category === 'main').length },
+    { id: 'templates', label: 'TEMPLATES & CLONES', count: activeProjects.filter(p => p.category === 'templates').length },
+    { id: 'learning', label: 'PYTHON & ALGORITHMS', count: activeProjects.filter(p => p.category === 'learning').length },
   ] as const;
 
   return (

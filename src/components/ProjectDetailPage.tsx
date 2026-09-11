@@ -266,7 +266,7 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
         </section>
 
         {/* ========================================================================= */}
-        {/* 2. SCREEN RECORDING / VIDEO — SECOND (STRICT REQUIREMENT)                 */}
+        {/* 2. SCREEN RECORDING / VIDEO GALLERY (UNLIMITED DYNAMIC VIDEOS)            */}
         {/* ========================================================================= */}
         <section className="space-y-4 pt-8">
           <div className="flex items-center justify-between pb-3 border-b border-[#6F5B43]/30">
@@ -276,54 +276,82 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
                 className="text-lg sm:text-xl font-bold uppercase tracking-wider text-[#E9E3DC]"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
-                2. SCREEN RECORDING &amp; VIDEO WALKTHROUGH
+                2. SCREEN RECORDINGS &amp; VIDEO WALKTHROUGHS
               </h2>
             </div>
 
             <span className="text-[10px] font-mono text-[#C8A77A] uppercase">
-              MP4 / WEBM READY
+              {project.videos?.length || 0} VIDEOS AVAILABLE
             </span>
           </div>
 
-          <div className="relative w-full aspect-video rounded-2xl border-2 border-[#6F5B43] bg-[#222120] overflow-hidden flex flex-col justify-between p-6 sm:p-10 shadow-lg">
-            <div className="relative z-10 flex items-center justify-between">
-              <span className="text-[11px] font-mono text-[#C8A77A] uppercase tracking-widest font-semibold">
-                // {project.name} • VIDEO SPECIFICATION
-              </span>
-              <span className="text-[10px] font-mono text-[#A9A39D] bg-[#151514] px-2.5 py-1 rounded-full border border-[#6F5B43]/40">
-                1080P HD CONTROLS
-              </span>
+          {(project.videos && project.videos.length > 0) ? (
+            <div className="space-y-6">
+              {project.videos.map((vid, vIdx) => (
+                <div
+                  key={vid.id || vIdx}
+                  className="relative w-full rounded-2xl border-2 border-[#6F5B43] bg-[#222120] overflow-hidden p-6 sm:p-8 shadow-lg"
+                >
+                  <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#6F5B43]/30">
+                    <span className="text-[11px] font-mono text-[#C8A77A] uppercase tracking-widest font-semibold">
+                      // {vid.title || `VIDEO 0${vIdx + 1}`}
+                    </span>
+                    <span className="text-[10px] font-mono text-[#A9A39D] bg-[#151514] px-2.5 py-1 rounded-full border border-[#6F5B43]/40">
+                      VIDEO 0{vIdx + 1}
+                    </span>
+                  </div>
+
+                  {vid.url ? (
+                    <div className="w-full aspect-video rounded-xl overflow-hidden bg-black border border-[#6F5B43]/40 mb-4">
+                      <video
+                        src={vid.url}
+                        controls
+                        playsInline
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <div className="relative w-full aspect-video rounded-xl border border-[#6F5B43]/40 bg-[#151514] overflow-hidden flex flex-col items-center justify-center text-center p-6 mb-4">
+                      <button
+                        onClick={() => setIsPlayingVideo(!isPlayingVideo)}
+                        className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#C8A77A] hover:bg-[#D8C3AA] text-[#0B0B0A] hover:scale-105 transition-all shadow-md mx-auto mb-3 cursor-pointer"
+                      >
+                        <Play className="w-6 h-6 fill-[#0B0B0A] ml-0.5" />
+                      </button>
+                      <h4 
+                        className="text-base sm:text-lg font-bold text-[#E9E3DC] uppercase tracking-tight"
+                        style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                      >
+                        {vid.title}
+                      </h4>
+                      <p className="text-xs text-[#A9A39D] max-w-md mt-1 font-light">
+                        {vid.caption || 'Upload an MP4 or WebM video file in the Admin CMS to enable interactive playback.'}
+                      </p>
+                    </div>
+                  )}
+
+                  {vid.caption && vid.url && (
+                    <p className="text-xs text-[#A9A39D] font-light leading-relaxed">
+                      {vid.caption}
+                    </p>
+                  )}
+                </div>
+              ))}
             </div>
-
-            {/* Video Player Canvas */}
-            <div className="relative z-10 text-center my-auto py-8">
-              <button
-                onClick={() => setIsPlayingVideo(!isPlayingVideo)}
-                className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#C8A77A] hover:bg-[#D8C3AA] text-[#0B0B0A] hover:scale-110 transition-all shadow-[0_0_30px_rgba(200,167,122,0.35)] mx-auto mb-4 cursor-pointer"
-              >
-                <Play className="w-7 h-7 sm:w-8 sm:h-8 fill-[#0B0B0A] ml-1" />
-              </button>
-
-              <h3 
-                className="text-xl sm:text-2xl font-bold text-[#E9E3DC] uppercase tracking-tight"
+          ) : (
+            <div className="p-8 rounded-2xl border-2 border-[#6F5B43]/40 bg-[#222120] text-center">
+              <Tv className="w-10 h-10 text-[#C8A77A] mx-auto mb-2 opacity-60" />
+              <h4 
+                className="text-base font-bold text-[#E9E3DC] uppercase"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
-                {project.videos?.[0]?.title || 'SCREEN RECORDING WALKTHROUGH'}
-              </h3>
-              <p 
-                className="text-xs sm:text-sm text-[#A9A39D] font-light max-w-lg mx-auto mt-2"
-                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-              >
-                {project.videos?.[0]?.caption ||
-                  'Dedicated video walkthrough container. Responsive video playback supporting MP4 and WebM media formats will display here once media files are linked.'}
+                NO VIDEO WALKTHROUGHS ATTACHED
+              </h4>
+              <p className="text-xs text-[#A9A39D] font-light mt-1 max-w-md mx-auto">
+                Walkthrough videos can be added anytime through the Admin Dashboard.
               </p>
             </div>
-
-            <div className="relative z-10 flex items-center justify-between pt-4 border-t border-[#6F5B43]/30 text-[10px] font-mono text-[#A9A39D]">
-              <span className="text-[#C8A77A]">MEDIA FORMATS: MP4, WEBM, EMBEDDED RECORDING</span>
-              <span>READY FOR ASSET INTEGRATION</span>
-            </div>
-          </div>
+          )}
         </section>
 
         {/* ========================================================================= */}
@@ -351,17 +379,27 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
             {(project.images && project.images.length > 0) ? (
               project.images.map((img, idx) => (
                 <div
-                  key={img.id}
+                  key={img.id || idx}
                   className="rounded-2xl border-2 border-[#6F5B43]/40 bg-[#222120] hover:border-[#C8A77A] p-6 flex flex-col justify-between transition-all group shadow-lg"
                 >
-                  <div className="w-full aspect-video rounded-xl border border-[#6F5B43]/40 bg-[#151514] flex flex-col items-center justify-center text-center p-6 mb-4 group-hover:border-[#C8A77A]/50 transition-colors">
-                    <ImageIcon className="w-8 h-8 text-[#C8A77A] mb-2" />
-                    <span className="text-xs font-mono text-[#E9E3DC] font-semibold uppercase">
-                      {img.title}
-                    </span>
-                    <span className="text-[10px] font-mono text-[#A9A39D] mt-1">
-                      UI SCREENSHOT SLOT 0{idx + 1}
-                    </span>
+                  <div className="w-full aspect-video rounded-xl border border-[#6F5B43]/40 bg-[#151514] overflow-hidden flex flex-col items-center justify-center text-center mb-4 group-hover:border-[#C8A77A]/50 transition-colors">
+                    {img.url ? (
+                      <img
+                        src={img.url}
+                        alt={img.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : (
+                      <div className="p-6">
+                        <ImageIcon className="w-8 h-8 text-[#C8A77A] mx-auto mb-2" />
+                        <span className="text-xs font-mono text-[#E9E3DC] font-semibold uppercase block">
+                          {img.title}
+                        </span>
+                        <span className="text-[10px] font-mono text-[#A9A39D] mt-1 block">
+                          UI SCREENSHOT SLOT 0{idx + 1}
+                        </span>
+                      </div>
+                    )}
                   </div>
 
                   <div>

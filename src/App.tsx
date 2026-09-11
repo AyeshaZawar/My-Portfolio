@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { HeroSection } from './components/HeroSection';
 import { AboutSection } from './components/AboutSection';
 import { TimelineSection } from './components/TimelineSection';
@@ -8,17 +8,37 @@ import { ContactSection } from './components/ContactSection';
 import { CategoryPage } from './components/CategoryPage';
 import { ProjectDetailPage } from './components/ProjectDetailPage';
 import { AllProjectsPage } from './components/AllProjectsPage';
+import { AdminDashboard } from './components/admin/AdminDashboard';
 import { categoryCardsData, allProjectsData } from './data/projectsData';
+import { getPublishedProjects } from './services/api';
 import type { CategoryCardData, ProjectItem } from './types/projects';
 
 type ViewMode = 
   | { type: 'home' }
   | { type: 'all' }
   | { type: 'category'; categoryId: 'templates' | 'learning' | 'main' }
-  | { type: 'project'; projectSlug: string; categoryId: 'templates' | 'learning' | 'main' };
+  | { type: 'project'; projectSlug: string; categoryId: 'templates' | 'learning' | 'main' }
+  | { type: 'admin' };
 
 function App() {
   const [currentView, setCurrentView] = useState<ViewMode>({ type: 'home' });
+  const [projects, setProjects] = useState<ProjectItem[]>(allProjectsData);
+
+  // Fetch dynamic projects from Backend/MongoDB CMS
+  const loadDynamicProjects = useCallback(async () => {
+    try {
+      const dynamicList = await getPublishedProjects();
+      if (Array.isArray(dynamicList) && dynamicList.length > 0) {
+        setProjects(dynamicList);
+      }
+    } catch {
+      // Graceful fallback to bundled allProjectsData
+    }
+  }, []);
+
+  useEffect(() => {
+    loadDynamicProjects();
+  }, [loadDynamicProjects]);
 
   // Sync URL hash / path on load and browser back/forward
   useEffect(() => {
@@ -26,6 +46,20 @@ function App() {
       const hash = window.location.hash.replace('#', '');
       const pathname = window.location.pathname;
       const target = hash || (pathname !== '/' ? pathname : '');
+
+      // Check for Admin Portal secret route (e.g. /zisha-space or #/zisha-space)
+      const lower = target.toLowerCase();
+      if (
+        lower === '/zisha-space' || 
+        lower.startsWith('/zisha-space') || 
+        lower === 'zisha-space' ||
+        lower === '/ziha-space' || 
+        lower.startsWith('/ziha-space')
+      ) {
+        setCurrentView({ type: 'admin' });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
 
       if (target.startsWith('/projects/')) {
         const parts = target.split('/').filter(Boolean); // ['projects', 'category', 'slug'?]
@@ -97,14 +131,44 @@ function App() {
   // Back Navigation: to Home
   const navigateBackToHome = () => {
     window.location.hash = '';
+    if (
+      window.location.pathname.toLowerCase().includes('zisha-space') ||
+      window.location.pathname.toLowerCase().includes('ziha-space')
+    ) {
+      window.history.pushState(null, '', '/');
+    }
     setCurrentView({ type: 'home' });
+    loadDynamicProjects(); // re-fetch if admin modified projects
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Render Admin Dashboard
+  if (currentView.type === 'admin') {
+    return (
+      <AdminDashboard
+        onReturnToPortfolio={navigateBackToHome}
+        onViewProjectOnSite={(category, slug) => {
+          const found = projects.find((p) => p.slug === slug || p.id === slug);
+          if (found) {
+            navigateToProject(found);
+          } else {
+            window.location.hash = `/projects/${category}/${slug}`;
+            setCurrentView({
+              type: 'project',
+              projectSlug: slug,
+              categoryId: category as any,
+            });
+          }
+        }}
+      />
+    );
+  }
 
   // Render All Projects Directory
   if (currentView.type === 'all') {
     return (
       <AllProjectsPage
+        projects={projects}
         onBackToHome={navigateBackToHome}
         onSelectProject={navigateToProject}
       />
@@ -113,9 +177,11 @@ function App() {
 
   // Render Level 3: Project Detail Page
   if (currentView.type === 'project') {
-    const project = allProjectsData.find(
+    const project = projects.find(
       (p) => p.slug === currentView.projectSlug || p.id === currentView.projectSlug
-    ) || allProjectsData.find((p) => p.category === currentView.categoryId);
+    ) || allProjectsData.find(
+      (p) => p.slug === currentView.projectSlug || p.id === currentView.projectSlug
+    ) || projects.find((p) => p.category === currentView.categoryId);
 
     if (project) {
       return (
@@ -131,12 +197,12 @@ function App() {
   // Render Level 2: Category Page
   if (currentView.type === 'category') {
     const category = categoryCardsData.find((c) => c.id === currentView.categoryId) || categoryCardsData[0];
-    const categoryProjects = allProjectsData.filter((p) => p.category === currentView.categoryId);
+    const categoryProjects = projects.filter((p) => p.category === currentView.categoryId);
 
     return (
       <CategoryPage
         category={category}
-        projects={categoryProjects}
+        projects={categoryProjects.length > 0 ? categoryProjects : allProjectsData.filter((p) => p.category === currentView.categoryId)}
         onSelectProject={navigateToProject}
         onBackToHome={navigateBackToHome}
       />
